@@ -1,0 +1,35 @@
+.purchase {
+  padding: 100px 0 80px;
+
+  .form input {
+    width: 80px;
+    height: 32px;
+    margin: 0 12px;
+    border-radius: 4px;
+    padding-left: 10px;
+  }
+}
+
+.border-top-auxiliary {
+  border-top: 1px solid $auxiliary;
+}
+
+.border-bottom-auxiliary {
+  border-bottom: 1px solid $auxiliary;
+}
+
+.bg-auxiliary {
+  background-color: $auxiliary;
+}
+
+.text-auxiliary {
+  color: $auxiliary;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.select-none {
+  user-select: none;
+}

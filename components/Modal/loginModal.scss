@@ -1,0 +1,231 @@
+.wrapper {
+  position: fixed;
+  left: 50%;
+  top: 160px;
+  max-width: 400px;
+  width: 100%;
+  height: 520px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  background: #c8c8c8;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transform: scale(0);
+  transition: transform 0.5s ease, height 0.2s ease;
+  z-index: 1000;
+
+  &.activeRegister {
+    height: 660px;
+
+    .form_box.register {
+      transform: translateX(0);
+      transition: transform 0.18s ease;
+    }
+  }
+
+  &.activeForgetPassword {
+    height: 300px;
+
+    .form_box.forgetPassword {
+      transform: translateX(0);
+      transition: transform 0.18s ease;
+    }
+  }
+
+  &.active_popup {
+    transform: scale(1) translateX(-50%);
+  }
+
+  .icon_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+
+    .close-icon {
+      margin-bottom: 6px;
+    }
+  }
+
+  .form_box {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    &.login {
+      transition: transform 0.18s ease;
+      transform: translateX(0);
+    }
+
+    &.register {
+      position: absolute;
+      transform: translateX(400px);
+      transition: none;
+    }
+
+    &.forgetPassword {
+      position: absolute;
+      transform: translateX(-400px);
+      transition: none;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #162938;
+      text-align: center;
+    }
+
+    .input_box {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      border-bottom: 2px solid #162938;
+      margin: 30px 0px;
+
+      label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        color: #53636b;
+        font-weight: 500;
+        pointer-events: none;
+        transition: 0.5s;
+      }
+
+      input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        color: #162938;
+        font-weight: 600;
+        padding: 0 35px 0 5px;
+      }
+
+      input:focus~label,
+      input.active~label {
+        top: -5px;
+      }
+
+      .icon {
+        position: absolute;
+        right: 8px;
+        font-size: 1.2rem;
+        color: #162938;
+        line-height: 57px;
+      }
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px 12px;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .btn_secondary {
+      background: #003756;
+
+      &:hover {
+        background: rgba(22, 41, 56, 0.9);
+      }
+    }
+
+    .btn_socialLogin {
+      background: #d14836;
+      margin-top: 30px;
+
+      &:hover {
+        background: rgba(209, 72, 54, 0.9);
+      }
+    }
+
+    .login_or {
+      position: relative;
+      display: block;
+      width: calc(100% + 30px);
+      height: 2px;
+      background-color: rgba(22, 41, 56, 0.3);
+      margin-top: 27px;
+      margin-bottom: 10px;
+      margin-right: -15px;
+      margin-left: -15px;
+
+      &::before {
+        content: 'OR';
+        position: absolute;
+        left: 50%;
+        top: -10px;
+        color: rgba(22, 41, 56, 0.3);
+        background-color: #c8c8c8;
+        transform: translateX(-50%);
+        padding: 0 15px;
+      }
+    }
+
+    .login_register {
+      font-size: 0.9rem;
+      color: #162938;
+      text-align: center;
+      font-weight: 500;
+      margin: 25px 0 10px;
+
+      p a {
+        color: #162938;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      p a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.background_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(#000, 0.7);
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+@include media-w768 {
+  .wrapper {
+    top: 100px;
+  }
+}
+
+.text-auxiliary {
+  color: $auxiliary;
+}

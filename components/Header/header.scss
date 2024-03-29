@@ -1,0 +1,206 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  padding: 30px 0;
+  transition: 0.3s all ease-in-out;
+  background-color: #c8c8c8;
+
+  &.sticky {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo a {
+      display: block;
+      width: 140px;
+      height: 42px;
+      background: url('@/assets/img/logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      text-indent: 101%;
+      white-space: nowrap;
+      overflow: hidden;
+
+      @include media-w768 {
+        width: 120px;
+      }
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+
+      li {
+        list-style: none;
+
+        &:nth-of-type(1) {
+          a {
+            margin-left: 0;
+          }
+        }
+
+        a {
+          position: relative;
+          color: $primary;
+          font-weight: 500;
+          margin-left: 40px;
+          cursor: pointer;
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background-color: $primary;
+            border-radius: 5px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s;
+          }
+
+          &:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+
+        .nuxt-link-exact-active,
+        .nuxt-link-active {
+          color: $secondary;
+        }
+
+        .nuxt-link-exact-active::after,
+        .nuxt-link-active::after {
+          // color: #161616;
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          width: 100%;
+          height: 2px;
+          background-color: $secondary;
+          border-radius: 5px;
+          transform: scaleX(1);
+        }
+
+        .btnLogin-popup,
+        .btnLogout-popup {
+          width: 120px;
+          height: 42px;
+          background-color: transparent;
+          border: 2px solid $primary;
+          outline: none;
+          border-radius: 6px;
+          cursor: pointer;
+          color: $primary;
+          font-weight: 500;
+          margin-left: 40px;
+          transition: 0.5s;
+
+          &:hover {
+            background-color: $primary;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-w900 {
+  .header .container {
+    .toggle {
+      position: relative;
+      width: 32px;
+      height: 40px;
+      // background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .toggle.active {
+      position: fixed;
+      top: 30px;
+      right: 40px;
+    }
+
+    .toggle::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: $tertiary;
+      transform: translateY(-10px);
+      transition: 0.25s;
+      box-shadow: 0 10px 0 $tertiary;
+    }
+
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: $tertiary;
+      transform: translateY(10px);
+      transition: 0.25s;
+    }
+
+    .toggle.active::before {
+      transform: translateY(0) rotate(45deg);
+      box-shadow: 0 0 0 $tertiary;
+      // background-color: #fff;
+    }
+
+    .toggle.active::after {
+      transform: translateY(0) rotate(-45deg);
+      // background-color: #fff;
+    }
+
+    .navigation {
+      display: none;
+    }
+
+    .navigation.active {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      // background-color: rgba(25, 25, 25);
+      background-color: #fff;
+      z-index: 999;
+    }
+
+    .navigation li a {
+      font-size: 1.5rem;
+      margin: 10px 0;
+      display: inline-block;
+    }
+
+    .navigation li .btnLogin-popup,
+    .navigation li .btnLogout-popup {
+      margin: 10px 0;
+    }
+  }
+}

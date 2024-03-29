@@ -1,0 +1,8 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.tabSize": 2,
+  "workbench.tree.indent": 12,
+  "emmet.triggerExpansionOnTab": true
+}

@@ -1,0 +1,91 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  position: relative;
+  color: $primary;
+  font-family: $font_family_base;
+  font-style: normal;
+  font-weight: 400;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  margin: 1rem 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+h1 {
+  color: black;
+  font-size: 27px;
+  line-height: 1.5;
+}
+
+.clearfix {
+  /* 新增用來清除浮動的屬性 */
+  clear: both;
+}
+
+// transition動畫
+.zoom-enter-active {
+  animation: zoomIn 0.5s;
+}
+
+.zoom-leave-active {
+  animation: zoomOut 0.5s;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+    transform-origin: top left;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+    transform-origin: top left;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,55 @@
+.swiper {
+  position: relative;
+  overflow: hidden;
+  padding-top: 20px;
+}
+
+.swiper-slide {
+  width: auto;
+}
+
+.swiper-button-next {
+  position: relative;
+  left: calc(100% - 20px);
+  top: -220px;
+}
+
+.swiper-button-prev {
+  position: relative;
+  left: -20px;
+  top: -200px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background: #000;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+
+  &::after {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+  }
+}
+
+::v-deep .swiper-pagination {
+  position: relative;
+  bottom: -10px;
+  .swiper-pagination-bullet {
+    margin-left: 7px;
+    margin-right: 7px;
+    background: $secondary;
+  }
+}
+
+// @include media-w900 {
+// 	.swiper {
+// 		display: none;
+// 	}
+
+// 	.swiper-pagination {
+// 		display: none;
+// 	}
+// }
