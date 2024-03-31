@@ -20,13 +20,12 @@ export default function ({ $axios, store }, inject) {
         params: config.params,
       }
 
-      console.log('process.env.FIREBASE_API_KEY', process.env.FIREBASE_API_KEY)
-
       config.params = {
         key: process.env.FIREBASE_API_KEY,
       }
 
       config.startTime = new Date().getTime()
+      config.headers['Content-Type'] = 'application/json'
 
       return config
     })
@@ -42,6 +41,7 @@ export default function ({ $axios, store }, inject) {
           '請求時間',
           response.config.endTime - response.config.startTime + 'ms'
         )
+        return response
       } else {
         const responseConfig = response ? response.config : {}
         console.error('response攔截報錯提示：', {
@@ -79,7 +79,7 @@ export default function ({ $axios, store }, inject) {
 
   const apiObject = {}
   for (const i in indexApi) {
-    apiObject[i] = indexApi[i](axiosConfig($axios.create()))
+    apiObject[i] = indexApi[i](axiosConfig($axios))
   }
 
   inject('api', apiObject)
