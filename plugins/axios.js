@@ -1,36 +1,86 @@
-import { parseCookie } from '~/assets/js/tool'
+import indexApi from '@/api/index'
 
-export default function ({ $axios, store, req }) {
-  $axios.onRequest((config) => {
-    config.params = {
-      key: process.env.FIREBASE_API_KEY,
-    }
-    return config
-  })
+// 轉換indexApi
 
-  $axios.onResponse((response) => {
-    if (response.status === 200 && response) {
-      return response
-    }
-  })
+export default function ({ $axios, store }, inject) {
+  function axiosConfig($axios) {
+    let requestConfig = {}
 
-  $axios.onError((error) => {
-    const code = parseInt(error.response && error.response.status)
-    const statusText = error.response.statusText
-    // eslint-disable-next-line no-console
-    // console.log(error.response)
-    if (code === 400) {
-      // redirect("/400")
-      // eslint-disable-next-line no-console
-      console.log('error', code)
-    }
-    if (code === 401 && statusText === 'Unauthorized') {
-      if (process.server) {
-        const cookiesFromServer = parseCookie(req.headers.cookie)
-        store.dispatch('exchangeToken', cookiesFromServer.refresh_token)
-      } else {
-        store.dispatch('exchangeToken')
+    // 設置API域名
+    $axios.setBaseURL(process.env.API_URL)
+
+    // 設置request攔截器
+    $axios.onRequest((config) => {
+      requestConfig = {
+        baseURL: config.baseURL,
+        url: config.url,
+        method: config.method,
+        data: config.data,
+        headers: config.headers,
+        params: config.params,
       }
-    }
-  })
+
+      console.log('process.env.FIREBASE_API_KEY', process.env.FIREBASE_API_KEY)
+
+      config.params = {
+        key: process.env.FIREBASE_API_KEY,
+      }
+
+      config.startTime = new Date().getTime()
+
+      return config
+    })
+
+    // 設置response攔截器
+    $axios.onResponse((response) => {
+      response.config.endTime = new Date().getTime()
+      const status = response.status
+
+      if (status === 200) {
+        console.info(
+          response.config.url,
+          '請求時間',
+          response.config.endTime - response.config.startTime + 'ms'
+        )
+      } else {
+        const responseConfig = response ? response.config : {}
+        console.error('response攔截報錯提示：', {
+          url: responseConfig.baseURL + responseConfig.url,
+          sttatus: response.status,
+          statusText: response.statusText,
+          method: responseConfig.method,
+          headers: responseConfig.headers,
+          data: responseConfig.data,
+          params: responseConfig.params,
+          responseData: response.data,
+        })
+      }
+    })
+
+    $axios.onError((error) => {
+      const response = error.response || {}
+      const responseConfig = response.config || {}
+      console.error('$axios.onError:', error)
+      console.error('錯誤處理提示', {
+        url: responseConfig.baseURL,
+        status: response.status,
+        statusText: response.statusText,
+        method: responseConfig.method,
+        headers: responseConfig.headers,
+        data: responseConfig.data,
+        params: responseConfig.params,
+        responseData: response.data,
+        ...requestConfig,
+      })
+    })
+
+    return $axios
+  }
+
+  const apiObject = {}
+  for (const i in indexApi) {
+    apiObject[i] = indexApi[i](axiosConfig($axios.create()))
+  }
+
+  inject('api', apiObject)
 }
