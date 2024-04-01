@@ -2,7 +2,7 @@
 import Cookie from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 import qs from 'qs'
-import API from '~/api/api.config'
+import API from '~/utils/api.config'
 
 export const state = () => ({
   isUserLoggedIn: false,

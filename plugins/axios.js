@@ -1,4 +1,4 @@
-import indexApi from '@/api/index'
+import indexApi from '@/utils/index'
 
 // 轉換indexApi
 

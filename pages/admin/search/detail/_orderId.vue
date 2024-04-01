@@ -397,7 +397,7 @@
 
 <script>
 import Cookie from 'js-cookie'
-import API from '~/api/api.config'
+import API from '~/utils/api.config'
 import { initOrderInfo } from '@/assets/js/initData'
 import Formatter from '~/components/Formatter.vue'
 import EditTextInput from '~/components/Input/EditTextInput.vue'

@@ -78,7 +78,7 @@
 
 <script>
 import Cookie from 'js-cookie'
-import API from '~/api/api.config'
+import API from '~/utils/api.config'
 import { initOrderInfo } from '@/assets/js/initData'
 import OrderForm from '@/components/Form/OrderForm.vue'
 import Formatter from '@/components/Formatter.vue'

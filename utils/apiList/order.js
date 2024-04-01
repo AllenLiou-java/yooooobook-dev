@@ -1,4 +1,4 @@
-import API from '~/api/api.config'
+import API from '~/utils/api.config'
 
 export default (axios) => ({
   // 串接所有訂單資料

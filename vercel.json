@@ -21,12 +21,8 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "nuxt.config.js",
-      "use": "@nuxtjs/vercel-builder@0.23.0",
+      "use": "@nuxtjs/vercel-builder@0.22.1",
       "config": {
         "serverFiles": ["server/**"]
       }

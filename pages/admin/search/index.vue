@@ -13,7 +13,7 @@
 <script>
 import qs from 'qs'
 import MultiFunctionTable from '@/components/Table/MultiFunctionTable.vue'
-import API from '~/api/api.config'
+import API from '~/utils/api.config'
 import { switchDeliveryCompany, switchOrderStatus } from '~/assets/js/tool'
 
 export default {

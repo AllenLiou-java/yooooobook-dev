@@ -291,7 +291,7 @@
 import Cookie from 'js-cookie'
 import Formatter from '@/components/Formatter.vue'
 import EditSelect from '@/components/Select/EditSelect.vue'
-import API from '~/api/api.config'
+import API from '~/utils/api.config'
 import { switchOrderStatus } from '~/assets/js/tool'
 
 export default {
