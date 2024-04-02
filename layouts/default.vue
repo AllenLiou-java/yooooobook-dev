@@ -139,8 +139,11 @@ export default {
             this.updateLoginInfo(loginRes.data)
             this.$refs.loginModal.formDataReset()
             // this.$store.dispatch('getOrderList', loginRes.data)
-            this.$api.member
-              .getAuthList(loginRes.data.idToken)
+            this.axios({
+              method: API.auth.getAuthList.method,
+              url: API.auth.getAuthList.url + '?auth=' + loginRes.data.idToken,
+            })
+
               .then((res) => {
                 const authList = res.data
                 const isAdministrator = authList[loginRes.data.localId] === true
@@ -209,8 +212,16 @@ export default {
       }
     },
     updateLoginInfo(loginResData) {
-      this.$api.member
-        .getMemberInfo(loginResData)
+      this.axios({
+        method: API.getMemberInfo.method,
+        url:
+          API.getMemberInfo.url.replace(
+            ':user_id.json',
+            loginResData.localId + '.json'
+          ) +
+          '?auth=' +
+          loginResData.idToken,
+      })
         .then((usersRes) => {
           const _data = {
             userName: usersRes.data.name,
@@ -242,12 +253,20 @@ export default {
           const postData = {
             emailVerified,
           }
-          this.$api.member
-            .patchMemberInfo(localId, idToken, postData)
-            .then((res) => {
-              Cookie.set('emailVerified', emailVerified)
-              this.$store.commit('setEmailVerified', emailVerified)
-            })
+          this.axios({
+            method: API.patchMemberInfo.method,
+            url:
+              API.patchMemberInfo.url.replace(
+                ':user_id.json',
+                localId + '.json'
+              ) +
+              '?auth=' +
+              idToken,
+            postData,
+          }).then((res) => {
+            Cookie.set('emailVerified', emailVerified)
+            this.$store.commit('setEmailVerified', emailVerified)
+          })
         })
         .catch((error) => {
           // eslint-disable-next-line no-console
